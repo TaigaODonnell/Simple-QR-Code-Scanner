@@ -1,4 +1,5 @@
 import cv2 as cv
+from helpers import isBlackModule
 
 img = cv.imread("./mcdonaldsYT.png")
 img2 = img.copy()
@@ -59,7 +60,15 @@ for (x, y, w, h) in cornerSquares:
 ## Stage 2: Finding the Timing Patterns
 ##
 
+# ***Timing patterns are the lines of alternating black and white squares between the corner squares
 
+# Now that we know the cordinates and pixel lengths, we find the timing pattern so that we can find 
+# the version of qr code to know how many modules there are / how big our list needs to be
+
+
+
+
+# =================================================================================================================================
 
 
 # cv.imshow("Image", img)
