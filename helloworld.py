@@ -34,12 +34,12 @@ for cnt in contours:
                 maxHeight = h
 
 ## Calculate the pixel length of one square in the 7x7 grid
-pixelLength = round(maxHeight / 7)
+pixelLength = maxHeight / 7
 
 ## Get rid of the inside corner square that are not pixellength and label TL, TR, BL
 filteredCornerSquares = []
 for (x, y, w, h) in cornerSquares:
-    if round(w/7) == pixelLength and round(h/7) == pixelLength:
+    if w/7 == pixelLength and h/7 == pixelLength:
         # Limitation : assuming that the qr code is not shifted at all at any angle and is near perfectly aligned
         if x == y:
             label = "TL"
@@ -52,6 +52,8 @@ for (x, y, w, h) in cornerSquares:
         # cv.putText(img2, label, (x + w//2, y + h//2), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
         # print(f"Found corner square at x:{x}, y:{y}, w:{w}, h:{h}")
 
+# print(f"Top Left: ({filteredCornerSquares[2][0]}, {filteredCornerSquares[2][1]})")
+# print(f"Bottom Right: ({filteredCornerSquares[1][0] + pixelLength * 7}, {filteredCornerSquares[0][1] + pixelLength * 7})")
 
 ##
 ## Stage 2: Finding the Timing Patterns
@@ -60,8 +62,9 @@ for (x, y, w, h) in cornerSquares:
 
 
 
-
 # cv.imshow("Image", img)
 cv.imshow("Image w/ Contours", img2)
-cv.waitKey(0)
+k = cv.waitKey(0)
+if k == 27:
+    cv.destroyAllWindows()
 
